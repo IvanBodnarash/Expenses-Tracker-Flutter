@@ -1,8 +1,9 @@
-import 'package:expence_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
-import 'package:expence_tracker/models/expense.dart';
+import 'package:expence_tracker/widgets/new_expense.dart';
 import 'package:expence_tracker/widgets/expenses_list/expenses_list.dart';
+import 'package:expence_tracker/models/expense.dart';
+import 'package:expence_tracker/widgets/chart/chart.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -50,6 +51,7 @@ class _ExpensesState extends State<Expenses> {
     setState(() {
       _registeredExpenses.remove(expense);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 3),
@@ -92,7 +94,7 @@ class _ExpensesState extends State<Expenses> {
       body: Column(
         children: [
           // Toolbar
-          const Text('The chart'),
+          Chart(expenses: _registeredExpenses),
           Expanded(
             child: mainContent,
           ),
